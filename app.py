@@ -4,6 +4,7 @@ import os
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 
 @app.route('/')
