@@ -70,13 +70,7 @@
         socket.emit('my event', {data: 'I\'m connected!'});
     })
 
-	function sendMessage () {
-		socket.emit("message",document.getElementById("chat-input").value)
-	}
-	socket.on("new_message",(data)=>{
-		document.getElementById("chat").innerHTML+="<br>"+data;
-	});
-		
+	
             $(document).ready(() => {
                 $('#form_send_msg').on('submit', (e) => {
                     e.preventDefault();
