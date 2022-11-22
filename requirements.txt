@@ -2,4 +2,4 @@ Flask
 Flask-SocketIO
 gunicorn==20.1.0
 eventlet==0.30.2
-pip install Flask-Cors==1.10.3
+Flask-Cors==1.10.3
