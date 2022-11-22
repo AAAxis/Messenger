@@ -1,15 +1,21 @@
-from flask import Flask, render_template, url_for, redirect, session, request, jsonify
-from flask_socketio import SocketIO
-from flask_cors import CORS
+from flask import Flask, render_template, make_response, redirect
+from flask_socketio import SocketIO, send, emit
+import os
 
 app = Flask(__name__)
-CORS(app)
 socketio = SocketIO(app)
-#secret key etc...
-...
-@socketio.on('message')
-def handle_msg(msg):
-    socketio.send('Syncing...')
+socketio.init_app(app, cors_allowed_origins="*")
 
-if __name__ == '__main__':
-    socketio.run(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@socketio.on("message")
+def handleMessage(data):
+    emit("new_message", data, broadcast=True)
+
+
+if __name__ == "__main__":
+    socketio.run(app, debug=True, host='0.0.0.0', port=5004)
