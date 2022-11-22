@@ -3,6 +3,7 @@
 <input id="chat-input" type="text"> <button onclick="sendMessage()">Send Message</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
+	socket = io();
 	const io = require("socket.io")(httpServer, {
   allowEIO3: true // false by default
 });
