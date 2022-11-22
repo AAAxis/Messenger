@@ -1,20 +1,13 @@
+
 <div id="chat"></div>
 <input id="chat-input" type="text"> <button onclick="sendMessage()">Send Message</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-export const socket = io();
-socket.connect('https://proman-code-cool.herokuapp.com/');
-
-function init() {
-
-    ...
-
-    //live sync
-    socket.on('message', function(msg) {
-        console.log(msg);
-        boardsManager.reloadBoards(userId);
-    });
-}
-
-init();
+	socket = io();
+	function sendMessage () {
+		socket.emit("message",document.getElementById("chat-input").value)
+	}
+	socket.on("new_message",(data)=>{
+		document.getElementById("chat").innerHTML+="<br>"+data;
+	})
 </script>
