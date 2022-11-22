@@ -6,7 +6,7 @@
 	
 	const io = require("socket.io")(httpServer, {
   allowEIO3: true // false by default
-})
+});
 	socket = io();
 	function sendMessage () {
 		socket.emit("message",document.getElementById("chat-input").value)
