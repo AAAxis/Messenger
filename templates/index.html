@@ -2,7 +2,7 @@
 <input id="chat-input" type="text"> <button onclick="sendMessage()">Send Message</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-	socket = io("0.0.0.0:5004")
+	socket = io("0.0.0.0")
 	function sendMessage () {
 		socket.emit("message",document.getElementById("chat-input").value)
 	}
