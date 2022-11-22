@@ -2,13 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	
+	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Chat Room | Flast + SocketIO</title>
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-</head>
+	<script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+
+ </head>
 <body>
 
     <div class="container mt-5 mb-4">
@@ -57,20 +61,29 @@
   
     {% if username is not none %}
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+      
 
 
         <script>
+		  var socket = io();
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    })
+
+	function sendMessage () {
+		socket.emit("message",document.getElementById("chat-input").value)
+	}
+	socket.on("new_message",(data)=>{
+		document.getElementById("chat").innerHTML+="<br>"+data;
+	});
+		
             $(document).ready(() => {
                 $('#form_send_msg').on('submit', (e) => {
                     e.preventDefault();
                 });
 
                 
-		     var socket = io();
-    socket.on('connect', function() {
-        socket.emit('my event', {data: 'I\'m connected!'})
-    })
+
                 const username = $('#username').text();
 
                 socket.on('connect', () => {
